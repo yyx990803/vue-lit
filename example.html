@@ -1,0 +1,49 @@
+<my-component></my-component>
+
+<script type="module">
+  import {
+    defineComponent,
+    reactive,
+    html,
+    onMounted,
+    onUpdated,
+    onUnmounted
+  } from './index.js'
+
+  defineComponent('my-component', (props) => {
+    const state = reactive({ show: true })
+    const toggle = () => {
+      state.show = !state.show
+    }
+
+    return () => html`
+      <button @click=${toggle}>toggle child</button>
+      ${state.show ? html`<my-child></my-child>` : ``}
+    `
+  })
+
+  defineComponent('my-child', (props) => {
+    const state = reactive({ count: 0 })
+    const increase = () => {
+      state.count++
+    }
+
+    onMounted(() => {
+      console.log('child mounted')
+    })
+
+    onUpdated(() => {
+      console.log('child updated')
+    })
+
+    onUnmounted(() => {
+      console.log('child unmounted')
+    })
+
+    return () => html`
+      <p>${props.msg}</p>
+      <p>${state.count}</p>
+      <button @click=${increase}>increase</button>
+    `
+  })
+</script>
