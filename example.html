@@ -10,19 +10,28 @@
     onUnmounted
   } from './index.js'
 
-  defineComponent('my-component', (props) => {
-    const state = reactive({ show: true })
+  defineComponent('my-component', () => {
+    const state = reactive({
+      text: 'hello',
+      show: true
+    })
     const toggle = () => {
       state.show = !state.show
+    }
+    const onInput = e => {
+      state.text = e.target.value
     }
 
     return () => html`
       <button @click=${toggle}>toggle child</button>
-      ${state.show ? html`<my-child></my-child>` : ``}
+      <p>
+      ${state.text} <input value=${state.text} @input=${onInput}>
+      </p>
+      ${state.show ? html`<my-child msg=${state.text}></my-child>` : ``}
     `
   })
 
-  defineComponent('my-child', (props) => {
+  defineComponent('my-child', ['msg'], (props) => {
     const state = reactive({ count: 0 })
     const increase = () => {
       state.count++

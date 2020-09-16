@@ -6,10 +6,18 @@ import {
 
 let currentInstance
 
-export function defineComponent(name, factory) {
+export function defineComponent(name, propDefs, factory) {
+  if (typeof propDefs === 'function') {
+    factory = propDefs
+    propDefs = []
+  }
+
   customElements.define(
     name,
     class extends HTMLElement {
+      static get observedAttributes() {
+        return propDefs
+      }
       constructor() {
         super()
         const props = (this._props = shallowReactive({}))
