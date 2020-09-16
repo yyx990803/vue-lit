@@ -1,6 +1,6 @@
 {
   "name": "@vue/lit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "proof of concept custom elements framework powered by @vue/reactivity + lit-html",
   "main": "index.js",
   "author": "Evan You",
