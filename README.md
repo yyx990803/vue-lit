@@ -6,6 +6,8 @@ The API is almost identical to [Vue Composition API](https://composition-api.vue
 
 ## Example
 
+[Live demo](https://jsfiddle.net/yyx990803/a3c8L1bf/)
+
 ```html
 <my-component></my-component>
 
