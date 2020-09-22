@@ -28,7 +28,7 @@ export function defineComponent(name, propDefs, factory) {
         const root = this.attachShadow({ mode: 'closed' })
         let isMounted = false
         effect(() => {
-          if (!isMounted) {
+          if (isMounted) {
             this._bu && this._bu.forEach((cb) => cb())
           }
           render(template(), root)
